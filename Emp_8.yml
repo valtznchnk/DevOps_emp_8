@@ -22,8 +22,11 @@
         repo: https://github.com/vinayakrj/java-war-project.git
         dest: /tmp/app
 
-    - name: Move workdir and mvn package
-      command: "cd /tmp/app/ && mvn package"
+    - name: Move workdir
+      command: "cd /tmp/app"
+
+    - name: Maven package app
+      command: "mvp package"
 
     - name: Copy war-file in master
       fetch:
