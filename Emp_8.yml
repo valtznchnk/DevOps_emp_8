@@ -14,17 +14,19 @@
         name: git
         state: present
 
-    - name: Git Clone Repository
+    - name: Example clone of a single branch
+      ansible.builtin.git:
+        repo: https://github.com/vinayakrj/java-war-project.git
+        dest: /tmp
+        single_branch: yes
+        version: main
       ansible.builtin.shell: |
-        mkdir /home/emp_8 &&
-        cd /home/emp_8 &&
-        git clone https://github.com/vinayakrj/java-war-project.git &&
-        cd java-war-project/ &&
+        cd /tmp &&
         mvn package
 
     - name: Copy war-file in master
       fetch:
-        src: /home/emp_8/java-war-project/target/my-app.war
+        src: /tmp/java-war-project/target/my-app.war
         dest: /tmp
 
 - name: Configure Prod
