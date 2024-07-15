@@ -23,10 +23,10 @@
         dest: /tmp/app
 
     - name: Move workdir
-      command: "cd /tmp/app"
+      shell: "cd /tmp/app"
 
     - name: Maven package app
-      command: "mvp package"
+      shell: "mvp package"
 
     - name: Copy war-file in master
       fetch:
