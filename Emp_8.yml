@@ -14,17 +14,20 @@
         name: git
         state: present
 
+    - name: Create workdir
+      command: "mkdir /tmp/app"
+
     - name: Example clone repository
       git:
         repo: https://github.com/vinayakrj/java-war-project.git
-        dest: /tmp
+        dest: /tmp/app
 
     - name: Move workdir
-      command: "cd /tmp/java-war-project && mvn package"
+      command: "cd /tmp/app/java-war-project && mvn package"
 
     - name: Copy war-file in master
       fetch:
-        src: /tmp/java-war-project/target/my-app.war
+        src: /tmp/app/java-war-project/target/my-app.war
         dest: /tmp
 
 - name: Configure Prod
