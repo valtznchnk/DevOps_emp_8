@@ -26,7 +26,7 @@
       shell: "cd /tmp/app"
 
     - name: Maven package app
-      command: "mvp package"
+      shell: "mvn package"
 
     - name: Copy war-file in master
       fetch:
