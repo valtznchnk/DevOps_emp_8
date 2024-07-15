@@ -27,7 +27,7 @@
 
     - name: Maven package app
       become: yes
-      shell: "mvn package"
+      command: "mvn clean package"
 
     - name: Copy war-file in master
       fetch:
@@ -44,7 +44,7 @@
         name: maven
         state: present
 
-    - name: Copy index.html
+    - name: Copy my-app.war
       copy:
         src: /tmp/my-app.war
         dest: /usr/local/tomcat/webapps/
