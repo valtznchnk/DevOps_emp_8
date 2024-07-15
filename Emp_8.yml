@@ -23,11 +23,8 @@
         dest: /tmp/app
 
     - name: Move workdir
-      shell: "cd /tmp/app"
-
-    - name: Maven package app
       become: yes
-      command: mvn clean package
+      shell: "cd /tmp/app && mvn package"
 
     - name: Copy war-file in master
       fetch:
