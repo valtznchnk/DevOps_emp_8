@@ -26,6 +26,7 @@
       shell: "cd /tmp/app"
 
     - name: Maven package app
+      become: yes
       shell: "mvn package"
 
     - name: Copy war-file in master
