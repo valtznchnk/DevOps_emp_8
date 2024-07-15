@@ -27,7 +27,7 @@
 
     - name: Maven package app
       become: yes
-      command: "mvn clean package"
+      command: mvn clean package
 
     - name: Copy war-file in master
       fetch:
