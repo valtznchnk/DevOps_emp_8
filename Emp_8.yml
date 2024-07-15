@@ -1,0 +1,53 @@
+---
+- name: Configure Deploy
+  hosts: deploy
+  become: yes
+
+  tasks:
+    - name: Ensure maven package is present
+      apt:
+        name: maven
+        state: present
+
+    - name: Ensure git package is present
+      apt:
+        name: git
+        state: present
+
+    - name: Git Clone Repository
+      ansible.builtin.shell: |
+        mkdir /home/emp_8 &&
+        cd /home/emp_8 &&
+        git clone https://github.com/vinayakrj/java-war-project.git &&
+        cd java-war-project/ &&
+        mvn package
+
+    - name: Copy war-file in master
+      fetch:
+        src: /home/emp_8/java-war-project/target/my-app.war
+        dest: /tmp
+
+    - name: Ensure nginx service is started
+      service:
+        name: maven
+        state: started
+
+- name: Configure Prod
+  hosts: prod
+  become: yes
+
+  tasks:
+    - name: Ensure maven package is present
+      apt:
+        name: maven
+        state: present
+
+    - name: Copy index.html
+      copy:
+        src: /tmp/my-app.war
+        dest: /usr/local/tomcat/webapps/
+
+    - name: Ensure maven service is started
+      service:
+        name: maven
+        state: started
