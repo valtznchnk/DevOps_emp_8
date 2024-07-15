@@ -20,6 +20,8 @@
         dest: /tmp
         single_branch: yes
         version: main
+
+    - name: Move workdir
       ansible.builtin.shell: |
         cd /tmp &&
         mvn package
