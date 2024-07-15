@@ -27,11 +27,6 @@
         src: /home/emp_8/java-war-project/target/my-app.war
         dest: /tmp
 
-    - name: Ensure nginx service is started
-      service:
-        name: maven
-        state: started
-
 - name: Configure Prod
   hosts: prod
   become: yes
@@ -46,8 +41,3 @@
       copy:
         src: /tmp/my-app.war
         dest: /usr/local/tomcat/webapps/
-
-    - name: Ensure maven service is started
-      service:
-        name: maven
-        state: started
